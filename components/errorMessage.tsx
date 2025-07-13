@@ -4,8 +4,8 @@ import { ErrorMessageType } from 'types/allType';
 
 const ErrorMessage = ({ message = "Une erreur c'est produite"}: ErrorMessageType) => {
     return (
-        <View>
-          <Text> {message} </Text>
+        <View className='items-center'>
+          <Text className='font-medium text-red-700'> {message} </Text>
         </View>
     );
 }
