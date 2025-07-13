@@ -5,18 +5,34 @@ import { isEmpty } from 'utils/stringUtilis';
 import ErrorMessage from './errorMessage';
 import axios from 'axios';
 import LoadingSpinner from './loadingSpinner';
+import * as z from "zod"
+
 const LoginPage = () => {
     const [ loading, setLoading ] = useState(false);
     const [ disable, setDisable ] = useState(true)
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [ error, setError ] = useState({ error: true, message: "Email ou mot de passe incorrecte" })
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [ error, setError ] = useState({ error: false, message: "Email ou mot de passe incorrecte" })
+
+    const User = z.object({
+        id: z.number(),
+        firstName: z.string(),
+        lastName: z.string(),
+        email: z.string(),
+        password: z.string(),
+        created: z.string().nullable(),
+        profilImage: z.string().nullable()
+    })
 
     const onFormSubmit = () => {
         setLoading(true)
-        axios.post("")
+        axios.post("https://movie-app-by-onek-ws.onrender.com/api/login", {email, password})
         .then((response) => {
+            if (!response.data.success || !User.parse(response.data.user)) {
+                setError({ error: true, message: "Une erreur c'est produite lors de la connexion" })
+            }
+            
 
         }).catch((error) => {
 
