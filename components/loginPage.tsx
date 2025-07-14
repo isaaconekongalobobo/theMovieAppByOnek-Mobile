@@ -6,9 +6,14 @@ import ErrorMessage from './errorMessage';
 import axios from 'axios';
 import LoadingSpinner from './loadingSpinner';
 import * as z from "zod"
-import { useUserConnected } from 'store/userConnected';
+import { useUserConnected } from 'store/userConnected'
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from 'navigation/RootNavigator';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Connexion'>;
 
 const LoginPage = () => {
+    const navigation = useNavigation<NavigationProp>();
     const [ loading, setLoading ] = useState(false);
     const setUserConnected = useUserConnected((state) => state.setUserConnected)
     const [ error, setError ] = useState({ error: false, message: "Email ou mot de passe incorrecte" })
@@ -27,6 +32,7 @@ const LoginPage = () => {
     })
 
     const onFormSubmit = () => {
+        console.log({ email, password})
         setLoading(true)
         axios.post("https://movie-app-by-onek-ws.onrender.com/api/login", {email, password})
         .then((response) => {
@@ -34,9 +40,11 @@ const LoginPage = () => {
                 setError({ error: true, message: "Une erreur c'est produite lors de la connexion" });
                 return
             }
-            setUserConnected(response.data.user)
+            setUserConnected(response.data.user);
+             navigation.replace('Tabs');
         }).catch((error) => {
-
+            setError({ error: false, message: "Une erreur c'est produite lors de la connexion"});
+            console.log(error)
         }).finally(() => {
             setError({ error: false, message: ""});
             setLoading(false)

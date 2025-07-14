@@ -7,6 +7,13 @@ import LoginPage from '../components/loginPage';
 
 const Stack = createNativeStackNavigator();
 
+export type RootStackParamList = {
+  Connexion: undefined;
+  Inscription: undefined;
+  Tabs: undefined;
+};
+
+
 export default function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
