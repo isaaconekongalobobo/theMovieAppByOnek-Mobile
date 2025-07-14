@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Accueil"
+      initialRouteName="connexion"
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarActiveTintColor: '#e91e63',

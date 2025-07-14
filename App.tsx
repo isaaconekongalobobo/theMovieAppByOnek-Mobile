@@ -1,13 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-
 import './global.css';
-import LoginPage from 'components/loginPage';
+import { NavigationContainer } from '@react-navigation/native';
+import RootNavigator from 'navigation/RootNavigator';
 
 export default function App() {
   return (
-    <>
-    <LoginPage />
-      <StatusBar style="auto" />
-    </>
+    <NavigationContainer  >
+      <RootNavigator />
+    </NavigationContainer>
   );
 }
