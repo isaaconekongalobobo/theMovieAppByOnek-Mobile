@@ -6,15 +6,16 @@ import ErrorMessage from './errorMessage';
 import axios from 'axios';
 import LoadingSpinner from './loadingSpinner';
 import * as z from "zod"
+import { useUserConnected } from 'store/userConnected';
 
 const LoginPage = () => {
     const [ loading, setLoading ] = useState(false);
-    const [ disable, setDisable ] = useState(true)
+    const setUserConnected = useUserConnected((state) => state.setUserConnected)
+    const [ error, setError ] = useState({ error: false, message: "Email ou mot de passe incorrecte" })
+
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [ error, setError ] = useState({ error: false, message: "Email ou mot de passe incorrecte" })
-
     const User = z.object({
         id: z.number(),
         firstName: z.string(),
@@ -30,21 +31,21 @@ const LoginPage = () => {
         axios.post("https://movie-app-by-onek-ws.onrender.com/api/login", {email, password})
         .then((response) => {
             if (!response.data.success || !User.parse(response.data.user)) {
-                setError({ error: true, message: "Une erreur c'est produite lors de la connexion" })
+                setError({ error: true, message: "Une erreur c'est produite lors de la connexion" });
+                return
             }
-            
-
+            setUserConnected(response.data.user)
         }).catch((error) => {
 
-        }).finally()
+        }).finally(() => {
+            setError({ error: false, message: ""});
+            setLoading(false)
+        })
     }
     return (
         <View className='bg-red-700 h-full items-center flex-1 pt-[50%] px-8 ' >
             <View className='px-8' >
-                <Image source={require("../assets/logo.png")}
-                className="w-80 h-24"
-                style={{ resizeMode: 'contain' }}
-                />
+                <Image source={require("../assets/logo.png")} className="w-80 h-24" style={{ resizeMode: 'contain' }}/>
             </View>
             <View className='bg-yellow-50 px-6 w-full py-10 rounded-2xl flex flex-col gap-5 '>
                 <Text className=' text-lg font-medium text-center '>Connectez vous pour continuer</Text>
