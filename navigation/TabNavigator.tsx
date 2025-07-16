@@ -16,7 +16,7 @@ export default function TabNavigator() {
       initialRouteName="Accueil"
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: '#e91e63',
+        tabBarActiveTintColor: '#FF0800',
         tabBarInactiveTintColor: 'gray',
         tabBarIcon: ({ color, size, focused }) => {
           switch (route.name) {

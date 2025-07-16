@@ -1,14 +1,14 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 const Accueill = () => {
     return (
-        <View>
-            
+        <View className=' bg-gradient-to-b from-black via-red-900 to-black h-full flex flex-col justify-center items-center '>
+            <View className='' ></View>
+            <Text>Votre plaisir commence ici</Text>
         </View>
     );
 }
 
-const styles = StyleSheet.create({})
 
 export default Accueill;

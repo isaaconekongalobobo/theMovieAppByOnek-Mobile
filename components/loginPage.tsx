@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 import { Image, Text, TextInput, View } from 'react-native';
 import SubmitButton from './submitButton';
 import { isEmpty } from 'utils/stringUtilis';
@@ -16,7 +17,14 @@ const LoginPage = () => {
     const navigation = useNavigation<NavigationProp>();
     const [ loading, setLoading ] = useState(false);
     const setUserConnected = useUserConnected((state) => state.setUserConnected)
+    const userConnected = useUserConnected((state) => state.userConnected)
     const [ error, setError ] = useState({ error: false, message: "Email ou mot de passe incorrecte" })
+
+    useEffect(() => {
+        if (userConnected) {
+           navigation.replace('Tabs'); 
+        }
+    }, []);
 
 
     const [email, setEmail] = useState('');
@@ -32,7 +40,6 @@ const LoginPage = () => {
     })
 
     const onFormSubmit = () => {
-        console.log({ email, password})
         setLoading(true)
         axios.post("https://movie-app-by-onek-ws.onrender.com/api/login", {email, password})
         .then((response) => {
@@ -41,9 +48,9 @@ const LoginPage = () => {
                 return
             }
             setUserConnected(response.data.user);
-             navigation.replace('Tabs');
+            navigation.replace('Tabs');
         }).catch((error) => {
-            setError({ error: false, message: "Une erreur c'est produite lors de la connexion"});
+            setError({ error: true, message: "Email ou mot de passe incorrecte"});
             console.log(error)
         }).finally(() => {
             setError({ error: false, message: ""});
