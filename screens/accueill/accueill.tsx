@@ -1,11 +1,15 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, ScrollView, Text, View} from 'react-native';
 
 const Accueill = () => {
     return (
-        <View className=' bg-gradient-to-b from-black via-red-900 to-black h-full flex flex-col justify-center items-center '>
-            <View className='' ></View>
-            <Text>Votre plaisir commence ici</Text>
+        <View className='h-full bg-black justify-center items-center' style={{ paddingHorizontal: 10 }} >
+            <ScrollView className='w-full pt-20' >
+                <View className='items-center gap-5'>
+                    <Image source={require('../../assets/avatar-cover.jpg')}  className='w-[90%] h-44 rounded-xl ' />
+                    <Text className='text-red-600 text-[1.5rem] font-semibold text-left '>Votre plaisir commence ici</Text>                    
+                </View>
+            </ScrollView>
         </View>
     );
 }

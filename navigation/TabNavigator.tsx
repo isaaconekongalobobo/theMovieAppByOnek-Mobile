@@ -34,6 +34,7 @@ export default function TabNavigator() {
               return null;
           }
         },
+        tabBarStyle: { backgroundColor: '#000', borderTopWidth: 0 }
       })}
     >
       <Tab.Screen name="Accueil" component={Accueill} />
