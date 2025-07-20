@@ -11,7 +11,7 @@ const Accueill = () => {
                         <Text className='text-white px-10 text-center'>Découvrez les meilleurs films et series actuels et explorer le sptième art avec une experience inedit...</Text>                    
                 </View>
                 <View className='mt-8 px-8'>
-                    <Text className='text-white text-xl font-medium '>Sélectionné pour vous...</Text>
+                    <Text className='text-white text-xl font-medium '>Films populaires...</Text>
                 </View>
                 <View className='mt-8 px-8'>
                     <Text className='text-white text-xl font-medium '>Series cultes...</Text>

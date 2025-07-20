@@ -8,7 +8,7 @@ export const useUserConnected = create<UserConnectedStore>()(
     (set) => ({
       userConnected: null,
       setUserConnected: (authenticatedUser: User | null) =>
-        set({ userConnected: authenticatedUser }),
+      set({ userConnected: authenticatedUser }),
     }),
     {
       name: 'user-connected-store',
