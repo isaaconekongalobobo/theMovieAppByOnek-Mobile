@@ -2,7 +2,6 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
-import Accueill from 'screens/accueill/accueill';
 import Series from 'screens/series/series';
 import Acteurs from 'screens/acteurs/acteurs';
 import Me from 'screens/moi/me';
