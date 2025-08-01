@@ -4,14 +4,14 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 interface HomeDataType {
-    popularMovies: Movie[] | null,
+    popularMovies: Movie[] | [],
     setPopularMovies: (movies: Movie[]) => void
 }
 
 export const useHomeData = create<HomeDataType>()(
     persist(
         (set) => ({
-            popularMovies: null,
+            popularMovies: [],
             setPopularMovies: (movies: Movie[]) => set({ popularMovies: movies })
         }),
         {
