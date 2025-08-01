@@ -3,10 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
 import Accueill from 'screens/accueill/accueill';
-import Films from 'screens/films/films';
 import Series from 'screens/series/series';
 import Acteurs from 'screens/acteurs/acteurs';
 import Me from 'screens/moi/me';
+import FilmsStack from 'screens/films/components/filmsStack';
+import HomeStack from 'screens/accueill/components/homeStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,8 +38,8 @@ export default function TabNavigator() {
         tabBarStyle: { backgroundColor: '#000', borderTopWidth: 0 }
       })}
     >
-      <Tab.Screen name="Accueil" component={Accueill} />
-      <Tab.Screen name="Films" component={Films} />
+      <Tab.Screen name="Accueil" component={HomeStack} />
+      <Tab.Screen name="Films" component={FilmsStack} />
       <Tab.Screen name="Séries" component={Series} />
       <Tab.Screen name="Acteurs" component={Acteurs} />
       <Tab.Screen name="Moi" component={Me} />
