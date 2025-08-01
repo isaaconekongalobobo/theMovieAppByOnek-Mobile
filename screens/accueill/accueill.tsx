@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, ScrollView, Text, View} from 'react-native';
 import PopularMovie from './components/popularMovie';
+import PopularSeries from './components/popularSeries';
 
 const Accueill = () => {
     return (
@@ -15,8 +16,9 @@ const Accueill = () => {
                     <Text className='text-red-500 text-xl font-medium ' style={{ opacity: 0.9 }}>Films populaires...</Text>
                     <PopularMovie/>
                 </View>
-                <View className='mt-8 px-8'>
-                    <Text className='text-white text-xl font-medium ' style={{ opacity: 0.9 }}>Series cultes...</Text>
+                <View className='mt-8 px-8 gap-6'>
+                    <Text className='text-red-500 text-xl font-medium ' style={{ opacity: 0.9 }}>Series cultes...</Text>
+                    <PopularSeries/>
                 </View>
                 <View className='mt-8 px-8'>
                     <Text className='text-white text-xl font-medium ' style={{ opacity: 0.9 }}>Categories</Text>

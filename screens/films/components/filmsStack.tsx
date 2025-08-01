@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Films from '../films';
-import MovieDetail from '../movieDetails';
+import MovieDetail from './movieDetails';
 const Stack = createNativeStackNavigator();
 
 const FilmsStack = () => {

@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Series from "screens/series/series";
 import { Movie, Serie } from "types/allType";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
