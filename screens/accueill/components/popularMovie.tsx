@@ -8,6 +8,7 @@ import { TMDB_API_KEY } from '@env';
 import MovieCard from './movieCard';
 import LoadingSpinner from 'components/loadingSpinner';
 import { Movie } from 'types/allType';
+import { checkInternetConnecion } from 'utils/otherUtils';
 
 const PopularMovie = () => {
   const [page, setPage] = useState(1);
@@ -19,8 +20,15 @@ const PopularMovie = () => {
   const popularMovies = useHomeData((state) => state.popularMovies);
   const setPopularMovies = useHomeData((state) => state.setPopularMovies);
 
-  const fetchMovies = (pageNumber: number) => {
+  const fetchMovies = async (pageNumber: number) => {
     setError({ error: false, message: '' });
+    const internetConnection = await checkInternetConnecion();
+
+    // Vérification de la connectivité à internet
+    if (!internetConnection) {
+      setError({ error: true, message: "Connectez vous à internet" })
+      return;
+    }
 
     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=fr-FR&page=${pageNumber}`)
         .then((response) => {
@@ -35,16 +43,16 @@ const PopularMovie = () => {
         
         const updatedMovies = pageNumber === 1 ? uniqueNewMovies : [...(popularMovies || []), ...uniqueNewMovies];
         setPopularMovies(updatedMovies);
-
         })
       .catch((err) => {
         console.log('Erreur lors du chargement des films : ', err);
         setError({ error: true, message: 'Erreur lors du chargement des films.' });
       })
       .finally(() => {
-        if (pageNumber === 1) {
-          setInitialLoading(false);
-        }
+        // if (pageNumber === 1) {
+        //   setInitialLoading(false);
+        // }
+        setInitialLoading(false);
         setLoadingMore(false);
       });
   };

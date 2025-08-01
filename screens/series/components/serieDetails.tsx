@@ -6,17 +6,17 @@ import { TMDB_API_KEY } from '@env';
 import { RouteProp, useRoute } from '@react-navigation/native';
 
 type RouteParams = {
-  MovieDetail: { id: number };
+  SerieDetail: { id: number };
 };
 
 const SerieDetails = () => {
-  const route = useRoute<RouteProp<RouteParams, 'MovieDetail'>>();
+  const route = useRoute<RouteProp<RouteParams, 'SerieDetail'>>();
   const { id } = route.params;
   const [movie, setMovie] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`)
+    axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`)
       .then(res => {
         setMovie(res.data);
       })
