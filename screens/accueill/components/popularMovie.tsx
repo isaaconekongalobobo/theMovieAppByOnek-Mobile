@@ -77,7 +77,7 @@ const PopularMovie = () => {
   }
 
   return (
-    <View style={{ left: -20 }}>
+    <View style={{ left: -20 }} className='w-[120%] '>
       {error.error && (
         <View className="mb-4 px-4">
           <Text className="text-red-500 text-center mb-2">{error.message}</Text>
