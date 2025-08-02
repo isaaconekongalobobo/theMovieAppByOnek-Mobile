@@ -14,7 +14,7 @@ const HomeStack = () => {
           backgroundColor: '#FF0800',
         },
         headerTitleStyle: {
-          color: '#FFF',
+          color: '#F0F8FF',
           fontWeight: 'bold',
           fontSize: 20
         }
