@@ -7,10 +7,21 @@ const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
     return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={Accueill} options={{ title: 'Films' }} />
+    <Stack.Navigator 
+      screenOptions= {{ 
+        headerShown: true, 
+        headerStyle: {
+          backgroundColor: '#FF0800',
+        },
+        headerTitleStyle: {
+          color: '#FFF',
+          fontWeight: 'bold',
+          fontSize: 20
+        }
+      }}>
+      <Stack.Screen name="Home" component={Accueill} options={{ title: 'The Movie App by Onek' }} />
       <Stack.Screen name="MovieDetail" component={MovieDetail} options={{ title: 'Détail du Film' }} />
-      <Stack.Screen name="SerieDetail" component={SerieDetails} options={{ title: 'Détail du Film' }} />
+      <Stack.Screen name="SerieDetail" component={SerieDetails} options={{ title: 'Détail de la serie' }} />
     </Stack.Navigator>
     );
 }
