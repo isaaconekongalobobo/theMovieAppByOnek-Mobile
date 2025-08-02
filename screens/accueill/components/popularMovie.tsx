@@ -49,9 +49,6 @@ const PopularMovie = () => {
         setError({ error: true, message: 'Erreur lors du chargement des films.' });
       })
       .finally(() => {
-        // if (pageNumber === 1) {
-        //   setInitialLoading(false);
-        // }
         setInitialLoading(false);
         setLoadingMore(false);
       });
@@ -78,7 +75,7 @@ const PopularMovie = () => {
 
   if (initialLoading) {
     return (
-      <View className="flex-1 items-center justify-center">
+      <View className="flex-1 py-10 items-center justify-center">
         <LoadingSpinner size={70} />
       </View>
     );

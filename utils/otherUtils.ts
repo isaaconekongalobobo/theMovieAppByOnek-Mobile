@@ -10,3 +10,12 @@ export const checkInternetConnecion = async () => {
     return false;
   }
 };
+
+// Découper un texte en plusieurs paragraphe en ayant comme délimiteur le point .
+export const paragraphFromText = (text: string) => {
+  return text
+    .split('.')
+    .map(p => p.trim())
+    .filter(p => p.length > 0)
+    .map(p => p + '.'); // On remet le point à la fin
+};
