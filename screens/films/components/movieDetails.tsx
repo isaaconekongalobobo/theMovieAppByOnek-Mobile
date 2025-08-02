@@ -19,6 +19,7 @@ const MovieDetail = () => {
   const [ isUserConnected, setIsUserConnected ] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
 
+  // Fonction pour checker la connectivité à internet
   const checkInternet = async () => {
     setError({ error: false, message: '' });
     const connectionState = await checkInternetConnecion();
@@ -43,6 +44,7 @@ const MovieDetail = () => {
       .finally(() => setLoading(false));
   }, [id]);
 
+  // Spinner de chargement
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center ">
@@ -51,6 +53,7 @@ const MovieDetail = () => {
     );
   }
 
+  // Message d'erreur de connexion
   if (!isUserConnected) {
     return (
       <View className="flex-1 items-center justify-center bg-black h-full ">
@@ -73,8 +76,6 @@ const MovieDetail = () => {
       </ScrollView>
     ); 
   }
-
-  return (null);
 };
 
 export default MovieDetail;
