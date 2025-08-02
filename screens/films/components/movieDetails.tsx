@@ -62,20 +62,26 @@ const MovieDetail = () => {
     );
   }
   
-  if (!error) {
-    return (
-      <ScrollView  className='bg-black px-6 py-10' contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false} >
-        <Image source={{ uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }} style={{ height: 500, borderRadius: 10 }} resizeMode='cover' />
-        <Text style={{ fontSize: 24, fontWeight: 'bold', marginVertical: 10 }}>{movie.title}</Text>
+  return (
+    <ScrollView  className='bg-black px-6 py-10' contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false} >
+      <Image source={{ uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }} style={{ height: 500, borderRadius: 10 }} resizeMode='cover' />
+        <Text style={{ fontSize: 24, fontWeight: 'bold', marginVertical: 10 }} className='text-red-600'>{movie.title}</Text>
         <View>
-          <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20 }}>Déscription</Text>
-          {paragraphFromText(movie.overview).map((paragraph, index) => (
-            <Text key={index} style={{ marginBottom: 12, color: 'white', fontSize: 16, opacity: 0.9 }}> {paragraph} </Text>
-          ))}
-        </View>
-      </ScrollView>
-    ); 
-  }
+          { movie.overview.length !== 0 ? (
+            <>
+              <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20 }}>Déscription</Text>
+              { 
+                paragraphFromText(movie.overview).map((paragraph, index) => (
+                  <Text key={index} style={{ marginBottom: 12, color: 'white', fontSize: 16, opacity: 0.9 }}> {paragraph} </Text>
+                ))
+              }           
+            </>
+          ) : '' }
+          
+
+      </View>
+    </ScrollView>
+  ); 
 };
 
 export default MovieDetail;

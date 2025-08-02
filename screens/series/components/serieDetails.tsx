@@ -61,15 +61,13 @@ const SerieDetails = () => {
     );
   }
 
-  if (!error) {
-    return (
-      <ScrollView style={{ padding: 16 }}>
-        <Image source={{ uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }} style={{ height: 300, borderRadius: 10 }} />
-        <Text style={{ fontSize: 24, fontWeight: 'bold', marginVertical: 10 }}>{movie.title}</Text>
-        <Text>{movie.overview}</Text>
-      </ScrollView>
-    );    
-  }
+  return (
+    <ScrollView style={{ padding: 16 }}>
+      <Image source={{ uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }} style={{ height: 300, borderRadius: 10 }} />
+      <Text style={{ fontSize: 24, fontWeight: 'bold', marginVertical: 10 }}>{movie.title}</Text>
+      <Text>{movie.overview}</Text>
+    </ScrollView>
+  );
 };
 
 export default SerieDetails;
