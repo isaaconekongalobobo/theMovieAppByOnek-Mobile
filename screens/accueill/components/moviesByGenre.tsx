@@ -1,0 +1,131 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable import/no-unresolved */
+import React, { useEffect, useState } from 'react';
+import { View, FlatList, Text, Pressable } from 'react-native';
+import axios from 'axios';
+import { TMDB_API_KEY } from '@env';
+import LoadingSpinner from 'components/loadingSpinner';
+import MovieCard from './movieCard';
+import { Movie } from 'types/allType';
+import { checkInternetConnecion } from 'utils/otherUtils';
+
+interface MovieByGenreProps {
+  genreId: number;
+  genreName: string;
+}
+
+const MovieByGenre = ({ genreId, genreName }: MovieByGenreProps) => {
+    const [ page, setPage ] = useState(1);
+    const [ totalPages, setTotalPages ] = useState<number | null>(null);
+    const [ movies, setMovies ] = useState<Movie[]>([]);
+    const [ loadingMore, setLoadingMore ] = useState(false);
+    const [ initialLoading, setInitialLoading ] = useState(true);
+    const [ isUserConnected, setIsUserConnected ] = useState(false);
+    const [ error, setError ] = useState({ error: false, message: '' });
+
+    const checkInternet = async () => {
+        setError({ error: false, message: '' });
+        const connectionState = await checkInternetConnecion();
+        setIsUserConnected(connectionState);
+        if (!connectionState) {
+        setError({ error: true, message: "Connectez-vous à internet" });
+        }
+    };
+
+    const fetchMovies = async (pageNumber: number) => {
+        setError({ error: false, message: '' });
+
+        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&page=${pageNumber}&with_genres=${genreId}`)
+        .then((response) => {
+            const newMovies: Movie[] = response.data.results;
+            const fetchedTotalPages: number = response.data.total_pages;
+
+            setTotalPages(fetchedTotalPages);
+
+            const existingIds = new Set(movies.map((m) => m.id));
+            const uniqueNewMovies = newMovies.filter((m) => !existingIds.has(m.id));
+
+            const updatedMovies = pageNumber === 1 ? uniqueNewMovies : [...movies, ...uniqueNewMovies];
+            setMovies(updatedMovies);
+        })
+        .catch((err) => {
+            setError({ error: true, message: 'Erreur lors du chargement des films.' });
+        })
+        .finally(() => {
+            setInitialLoading(false);
+            setLoadingMore(false);
+        });
+    };
+
+    useEffect(() => {
+        checkInternet();
+    }, []);
+
+    useEffect(() => {
+        fetchMovies(1);
+    }, [genreId]);
+
+    const loadMore = () => {
+        if (!loadingMore && (totalPages === null || page < totalPages)) {
+        const nextPage = page + 1;
+        setPage(nextPage);
+        setLoadingMore(true);
+        fetchMovies(nextPage);
+        }
+    };
+
+    const retryFetch = () => {
+        if (!isUserConnected) {
+        setError({ error: true, message: 'Connectez-vous à internet' });
+        return;
+    }
+
+    setInitialLoading(true);
+    setPage(1);
+    fetchMovies(1);
+    };
+
+    if (initialLoading) {
+        return (
+        <View className="py-10 items-center justify-center">
+            <LoadingSpinner size={70} />
+        </View>
+        );
+    }
+
+    if (error.error) {
+        return (
+        <View className="mb-4 px-4">
+            <Text className="text-red-500 text-center mb-2">{error.message}</Text>
+            <Pressable onPress={retryFetch} className="bg-red-600 px-4 py-2 rounded-full self-center">
+            <Text className="text-white font-bold">Réessayer</Text>
+            </Pressable>
+        </View>
+        );
+    }
+
+    return (
+        <View className="mb-10">
+            <Text className="text-red-500 text-xl font-medium mb-3">{genreName}</Text>
+            <FlatList
+                data={movies}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => <MovieCard movie={item} />}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ paddingHorizontal: 16 }}
+                onEndReached={loadMore}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={
+                loadingMore ? (
+                    <View style={{ width: 100, alignItems: 'center', justifyContent: 'center' }}>
+                    <LoadingSpinner size={30} />
+                    </View>
+                ) : null
+                }
+            />
+        </View>
+    );
+};
+
+export default MovieByGenre;
