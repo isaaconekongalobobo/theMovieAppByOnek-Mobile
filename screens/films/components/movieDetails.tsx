@@ -70,14 +70,14 @@ const MovieDetail = () => {
       
       <View className='gap-5'>
         <View className=''>
-          <Text style={{ fontSize: 24, fontWeight: 'bold', marginVertical: 10 }} className='text-red-600'>{movie?.title}</Text>
+          <Text style={{ fontSize: 28, fontWeight: 'bold', marginVertical: 10 }} className='text-red-600'>{movie?.title}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             { movie?.genres.map( gender => <GenderItem key={gender.id} genre={gender.name} /> )}
           </ScrollView>
         </View>
           
-        <View>
-          <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20 }}>Déscription</Text>
+        <View className='gap-2'>
+          <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>Déscription</Text>
           { movie?.overview.length !== 0 ? (
               paragraphFromText(movie?.overview )?.map((paragraph, index) => (
                 <Text key={index} style={{ marginBottom: 12, color: 'white', fontSize: 16, opacity: 0.9 }}> {paragraph} </Text>
