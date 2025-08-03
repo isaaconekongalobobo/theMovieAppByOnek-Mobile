@@ -75,7 +75,8 @@ const MovieDetail = () => {
             { movie?.genres.map( gender => <GenderItem key={gender.id} genre={gender.name} /> )}
           </ScrollView>
         </View>
-          
+        
+        {/* Description */}
         <View className='gap-2'>
           <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>Déscription</Text>
           { movie?.overview.length !== 0 ? (
@@ -84,7 +85,15 @@ const MovieDetail = () => {
               ))
             ) : '' 
           }
-        </View>        
+        </View>  
+
+        {/* Budget */}
+        <View className='gap-2'>
+          <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>Budget</Text>
+          <Text className='text-blue-50 text-balance' style={{ fontSize: 16, opacity: 0.9 }}>
+            {movie?.budget === 0 ? "Aucun détail sur le budget" : movie?.budget.toLocaleString() + " $"}
+          </Text>
+        </View>
       </View>
     </ScrollView>
   ); 
