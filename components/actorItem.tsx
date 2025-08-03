@@ -13,7 +13,7 @@ const ActorItem = ({ actor }: ActorItemProps) => {
             <Image className="bg-center bg-cover size-40 rounded-2xl object-cover" src={imageUrl}/>
             <View className="p-4">
                 <Text className="text-lg font-semibold text-red-600">{actor.name}</Text>
-                <Text className="text-sm text-zinc-400">comme {actor.character}</Text>
+                <Text className="text-sm text-zinc-300">comme {actor.character}</Text>
             </View>
         </TouchableOpacity>        
     )

@@ -11,6 +11,7 @@ import LoadingSpinner from 'components/loadingSpinner';
 import { Actor, Movie } from 'types/allType';
 import GenderItem from './genderItem';
 import ActorItem from 'components/actorItem';
+import ProducerItem from 'components/producerItem';
 
 type RouteParams = {
   MovieDetail: { id: number };
@@ -122,8 +123,16 @@ const MovieDetail = () => {
         {/* Acteurs */}
         <View className='gap-5'>
           <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>À l'affiche</Text>
-          <ScrollView horizontal className='text-blue-50 text-balance'>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} className='text-blue-50 text-balance'>
             { movieActors?.map((actor)=> <ActorItem key={actor.id} actor={actor} />) }
+          </ScrollView>
+        </View>
+
+        {/* Acteurs */}
+        <View className='gap-5'>
+          <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>Production</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} className='text-blue-50 text-balance'>
+            { movie?.production_companies?.map((producer)=> <ProducerItem key={producer.id} producer={producer} />) }
           </ScrollView>
         </View>
 
