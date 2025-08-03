@@ -1,13 +1,12 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Accueill from '../accueill';
+import Acteurs from '../acteurs';
+import ActorDetails from './acteurDetails';
 import MovieDetail from 'screens/films/components/movieDetails';
-import SerieDetails from 'screens/series/components/serieDetails';
-import ActorDetails from 'screens/acteurs/components/acteurDetails';
 const Stack = createNativeStackNavigator();
 
-const HomeStack = () => {
-    return (
+const ActorStack = () => {
+  return (
     <Stack.Navigator 
       screenOptions= {{ 
         headerShown: true, 
@@ -20,12 +19,11 @@ const HomeStack = () => {
           fontSize: 20
         }
       }}>
-      <Stack.Screen name="Home" component={Accueill} options={{ title: 'The Movie App by Onek' }} />
+      <Stack.Screen name="ActeursHome" component={Acteurs} options={{ title: 'Acteurs' }} />
+      <Stack.Screen name="ActorDetail" component={ActorDetails} options={{ title: "Détails sur l'acteur" }} />
       <Stack.Screen name="MovieDetail" component={MovieDetail} options={{ title: 'Détail du Film' }} />
-      <Stack.Screen name="SerieDetail" component={SerieDetails} options={{ title: 'Détail de la serie' }} />
-      <Stack.Screen name="ActorDetail" component={ActorDetails} options={{ title: 'Détails de la série' }} />
     </Stack.Navigator>
-    );
+  );
 }
 
-export default HomeStack;
+export default ActorStack;

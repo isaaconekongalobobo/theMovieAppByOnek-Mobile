@@ -116,10 +116,28 @@ export interface Actor {
   original_name: string;
   popularity: number;
   profile_path: string | null;
-  cast_id: number;
-  character: string;
-  credit_id: string;
-  order: number;
+  known_for: ActorMovie[];
+  biography?: string
+  deathday?: string
+  birthday?: string
+  place_of_birth?: string
 }
+
+export interface ActorMovie {
+    backdrop_path: string | null;
+    id: number;
+    title?: string;         // Présent si c'est un film
+    name?: string;          // Présent si c'est une série
+    original_title?: string;
+    original_name?: string;
+    media_type: "movie" | "tv";
+    poster_path: string | null;
+    release_date?: string;
+    first_air_date?: string;
+    vote_average: number;
+    vote_count: number;
+    overview: string;
+};
+
 
 
