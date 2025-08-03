@@ -50,7 +50,7 @@ const PopularMovie = () => {
         setPopularMovies(updatedMovies);
       })
       .catch((err) => {
-        console.log('Erreur lors du chargement des films : ', err);
+        // console.log('Erreur lors du chargement des films : ', err);
         setError({ error: true, message: 'Erreur lors du chargement des films.' });
       })
       .finally(() => {
@@ -109,30 +109,27 @@ const PopularMovie = () => {
     )
   }
 
-  if (!error.error && popularMovies.length !== 0) {
-    return (
-      <View style={{ left: -20 }} className='w-[120%] '>
-        <FlatList
-          data={popularMovies}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <MovieCard movie={item} />}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 16 }}
-          onEndReached={loadMore}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={
-            loadingMore ? (
-              <View style={{ width: 100, alignItems: 'center', justifyContent: 'center' }}>
-                <LoadingSpinner size={30} />
-              </View>
-            ) : null
-          }
-        />
-      </View>
-    );    
-  }
-
+  return (
+    <View style={{ left: -20 }} className="w-[120%] ">
+      <FlatList
+        data={popularMovies}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <MovieCard movie={item} />}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 16 }}
+        onEndReached={loadMore}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={
+        loadingMore ? (
+          <View style={{ width: 100, alignItems: 'center', justifyContent: 'center' }}>
+            <LoadingSpinner size={30} />
+          </View>
+          ) : null
+        }
+      />
+    </View>
+  ); 
 };
 
 export default PopularMovie;
