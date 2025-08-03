@@ -9,7 +9,7 @@ const AuthStack = () => {
     return (
         <>
             <StatusBar backgroundColor="#FF0800" barStyle="light-content" />
-            <Stack.Navigator initialRouteName='Login'>
+            <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
                 <Stack.Screen name='Login' component={LoginPage}/>
                 <Stack.Screen name='Signin' component={SinginPage}/>
             </Stack.Navigator>        

@@ -12,6 +12,7 @@ import { Actor, Movie } from 'types/allType';
 import GenderItem from './genderItem';
 import ActorItem from 'components/actorItem';
 import ProducerItem from 'components/producerItem';
+import MovieTrailer from './movieTrailer';
 
 type RouteParams = {
   MovieDetail: { id: number };
@@ -128,12 +129,18 @@ const MovieDetail = () => {
           </ScrollView>
         </View>
 
-        {/* Acteurs */}
+        {/* Production */}
         <View className='gap-5'>
           <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>Production</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className='text-blue-50 text-balance'>
             { movie?.production_companies?.map((producer)=> <ProducerItem key={producer.id} producer={producer} />) }
           </ScrollView>
+        </View>
+
+        {/* Trailler */}
+        <View className='gap-5'>
+          <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>Production</Text>
+           <MovieTrailer movieId={id} />
         </View>
 
       </View>
