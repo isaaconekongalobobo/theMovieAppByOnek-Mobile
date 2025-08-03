@@ -136,6 +136,12 @@ const MovieDetail = () => {
           </ScrollView>
         </View>
 
+        {/* Acteurs */}
+        <View className='gap-5'>
+          <Text className='text-blue-50 text-balance font-semibold text-center' style={{ fontSize: 30, opacity: 0.9 }}>Le Trailer</Text>
+
+        </View>
+
       </View>
     </ScrollView>
   ); 
