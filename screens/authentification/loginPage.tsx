@@ -17,13 +17,17 @@ const LoginPage = () => {
     const navigation = useNavigation<NavigationProp>();
     const [ loading, setLoading ] = useState(false);
     const setUserConnected = useUserConnected((state) => state.setUserConnected)
-    const userConnected = useUserConnected((state) => state.userConnected)
+    // const userConnected = useUserConnected((state) => state.userConnected)
     const [ error, setError ] = useState({ error: false, message: "Email ou mot de passe incorrecte" })
 
+    // useEffect(() => {
+    //     if (userConnected) {
+    //        navigation.replace('Tabs'); 
+    //     }
+    // }, []);
+
     useEffect(() => {
-        if (userConnected) {
-           navigation.replace('Tabs'); 
-        }
+        navigation.replace('Tabs'); 
     }, []);
 
 
