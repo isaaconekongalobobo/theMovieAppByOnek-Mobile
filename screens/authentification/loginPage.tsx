@@ -11,7 +11,7 @@ import { useUserConnected } from 'store/userConnected'
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from 'navigation/RootNavigator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Connexion'>;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Authentication'>;
 
 const LoginPage = () => {
     const navigation = useNavigation<NavigationProp>();
