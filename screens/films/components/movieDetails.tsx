@@ -12,6 +12,7 @@ import { Actor, Movie } from 'types/allType';
 import GenderItem from './genderItem';
 import ActorItem from 'components/actorItem';
 import ProducerItem from 'components/producerItem';
+import MovieTrailer from './movieTrailer';
 
 type RouteParams = {
   MovieDetail: { id: number };
@@ -77,7 +78,7 @@ const MovieDetail = () => {
   }
   
   return (
-    <ScrollView  className='bg-black px-6 py-10' contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false} >
+    <ScrollView  className='bg-black px-6 py-10' contentContainerStyle={{ paddingBottom: 80 }} showsVerticalScrollIndicator={false} >
       <Image source={{ uri: `https://image.tmdb.org/t/p/w500${movie?.poster_path}` }} style={{ height: 500, borderRadius: 10 }} resizeMode='cover' />
       
       <View className='gap-5'>
@@ -137,8 +138,9 @@ const MovieDetail = () => {
         </View>
 
         {/* Acteurs */}
-        <View className='gap-5'>
+        <View className='gap-2'>
           <Text className='text-blue-50 text-balance font-semibold text-center' style={{ fontSize: 30, opacity: 0.9 }}>Le Trailer</Text>
+          <MovieTrailer movieId={id} />
        </View>
 
       </View>

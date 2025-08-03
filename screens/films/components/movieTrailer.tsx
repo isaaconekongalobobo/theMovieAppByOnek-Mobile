@@ -1,14 +1,15 @@
+/* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
 import { Text, View, ActivityIndicator } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { TMDB_API_KEY } from '@env';
 
 import axios from 'axios';
+import LoadingSpinner from 'components/loadingSpinner';
 
 interface MovieTrailerProps {
   movieId: number;
 }
-
-const TMDB_API_KEY = process.env.EXPO_PUBLIC_TMDB_API_KEY;
 
 const MovieTrailer = ({ movieId }: MovieTrailerProps) => {
   const [trailerUrl, setTrailerUrl] = useState<string | null>(null);
@@ -17,13 +18,9 @@ const MovieTrailer = ({ movieId }: MovieTrailerProps) => {
   useEffect(() => {
     const fetchTrailer = async () => {
       try {
-        const res = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${TMDB_API_KEY}&language=fr-FR`
-        );
+        const res = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${TMDB_API_KEY}&language=fr-FR`);
 
-        const trailers = res.data.results.filter(
-          (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
-        );
+        const trailers = res.data.results.filter((video: any) => video.type === 'Trailer' && video.site === 'YouTube');
 
         if (trailers.length > 0) {
           const embedUrl = `https://www.youtube.com/embed/${trailers[0].key}`;
@@ -40,7 +37,7 @@ const MovieTrailer = ({ movieId }: MovieTrailerProps) => {
   }, [movieId]);
 
   if (loading) {
-    return <ActivityIndicator size="large" color="#E53935" />;
+    return <LoadingSpinner size={50} />;
   }
 
   if (!trailerUrl) {
