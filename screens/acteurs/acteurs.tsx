@@ -72,18 +72,20 @@ const Actors = () => {
         <SafeAreaView className="flex-1 bg-black">
             <View className="px-4 py-8 gap-3">
                 <Text className="text-red-600 text-xl font-semibold">Rechercher un acteur</Text>
-                <TextInput
-                    className="border border-red-600 rounded-md text-white px-4 py-2"
-                    placeholder="Nom de l'acteur..."
-                    placeholderTextColor="#ccc"
-                    value={search}
-                    onChangeText={setSearch}
-                />
+                <TextInput className="border border-red-600 rounded-md text-white px-4 py-2" placeholder="Nom de l'acteur..." placeholderTextColor="#ccc" value={search} onChangeText={setSearch}/>
             </View>
 
             <ScrollView className="pt-4" contentContainerStyle={{ paddingBottom: 60 }} showsVerticalScrollIndicator={false}>
                 {search.trim().length > 0 ? renderSearchResults() : <Text className="text-center text-gray-400">Tapez un nom d’acteur pour démarrer la recherche.</Text>}
             </ScrollView>
+
+            {/* 
+            
+             Ici, :
+             - liste horizontales des acteurs les plus célebres
+             - Liste des acteurs par univers
+            
+            */}
         </SafeAreaView>
     );
 };
