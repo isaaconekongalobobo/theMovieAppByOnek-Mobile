@@ -24,6 +24,7 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState<Movie>();
   const [ movieActors, setMovieActors ] = useState<Actor[]>()
   const [loading, setLoading] = useState(true);
+  const [ actorsLoading, setActorsLoading ] = useState(false)
   const [ isUserConnected, setIsUserConnected ] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
 
@@ -52,17 +53,18 @@ const MovieDetail = () => {
       .finally(() => setLoading(false));
   }, [id]);
 
+  // Récuperation des acteurs du films
   useEffect(() => {
-    // Récuperation des acteurs du films
+    setActorsLoading(true)
     axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${TMDB_API_KEY}&language=fr-FR`)
     .then((response)=> setMovieActors(response.data.cast))
-    .finally(() => setLoading(false));
+    .finally(() => setActorsLoading(false));
   }, []);
 
   // Spinner de chargement
   if (loading) {
     return (
-      <View className="flex-1 items-center justify-center ">
+      <View className="flex-1 items-center bg-black justify-center ">
         <LoadingSpinner size={70} />
       </View>
     );
@@ -126,6 +128,7 @@ const MovieDetail = () => {
           <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>À l'affiche</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className='text-blue-50 text-balance'>
             { movieActors?.map((actor)=> <ActorItem key={actor.id} actor={actor} />) }
+            { actorsLoading && <LoadingSpinner size={50} /> }
           </ScrollView>
         </View>
 

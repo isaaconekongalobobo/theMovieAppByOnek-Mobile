@@ -1,10 +1,10 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
-import { Text, ActivityIndicator, ScrollView, Image, View } from 'react-native';
+import { Text, ScrollView, Image, View } from 'react-native';
 import axios from 'axios';
 import { TMDB_API_KEY } from '@env';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { checkInternetConnecion, paragraphFromText } from 'utils/otherUtils';
+import { checkInternetConnecion } from 'utils/otherUtils';
 import LoadingSpinner from 'components/loadingSpinner';
 
 type RouteParams = {
