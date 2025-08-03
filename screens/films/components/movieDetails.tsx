@@ -128,7 +128,7 @@ const MovieDetail = () => {
           </ScrollView>
         </View>
 
-        {/* Acteurs */}
+        {/* Production */}
         <View className='gap-5'>
           <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>Production</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className='text-blue-50 text-balance'>
@@ -139,8 +139,7 @@ const MovieDetail = () => {
         {/* Acteurs */}
         <View className='gap-5'>
           <Text className='text-blue-50 text-balance font-semibold text-center' style={{ fontSize: 30, opacity: 0.9 }}>Le Trailer</Text>
-
-        </View>
+       </View>
 
       </View>
     </ScrollView>

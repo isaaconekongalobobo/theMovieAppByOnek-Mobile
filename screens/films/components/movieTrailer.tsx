@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, ActivityIndicator } from 'react-native';
 import { WebView } from 'react-native-webview';
+
 import axios from 'axios';
 
 interface MovieTrailerProps {

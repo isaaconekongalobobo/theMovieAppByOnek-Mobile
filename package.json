@@ -30,10 +30,17 @@
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-vector-icons": "^10.2.0",
+<<<<<<< HEAD
     "react-native-webview": "13.13.5",
     "react-native-youtube-iframe": "^2.4.1",
     "zod": "^4.0.5",
     "zustand": "^5.0.6"
+=======
+    "react-native-youtube-iframe": "^2.4.1",
+    "zod": "^4.0.5",
+    "zustand": "^5.0.6",
+    "react-native-webview": "13.13.5"
+>>>>>>> 92c7bec (Résolution du problème des dépendances native react-native-webview et masquage du header dans la stack de connection)
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
