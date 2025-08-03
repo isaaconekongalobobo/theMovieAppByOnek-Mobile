@@ -1,26 +1,30 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
-import { Text, View, ActivityIndicator } from 'react-native';
+import { Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { TMDB_API_KEY } from '@env';
-
 import axios from 'axios';
 import LoadingSpinner from 'components/loadingSpinner';
 
 interface MovieTrailerProps {
   movieId: number;
+  type?: 'movie' | 'tv'; // ajout du type
 }
 
-const MovieTrailer = ({ movieId }: MovieTrailerProps) => {
+const MovieTrailer = ({ movieId, type = 'movie' }: MovieTrailerProps) => {
   const [trailerUrl, setTrailerUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTrailer = async () => {
       try {
-        const res = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${TMDB_API_KEY}&language=fr-FR`);
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/${type}/${movieId}/videos?api_key=${TMDB_API_KEY}&language=fr-FR`
+        );
 
-        const trailers = res.data.results.filter((video: any) => video.type === 'Trailer' && video.site === 'YouTube');
+        const trailers = res.data.results.filter(
+          (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
+        );
 
         if (trailers.length > 0) {
           const embedUrl = `https://www.youtube.com/embed/${trailers[0].key}`;
@@ -34,7 +38,7 @@ const MovieTrailer = ({ movieId }: MovieTrailerProps) => {
     };
 
     fetchTrailer();
-  }, [movieId]);
+  }, [movieId, type]);
 
   if (loading) {
     return <LoadingSpinner size={50} />;
@@ -50,7 +54,12 @@ const MovieTrailer = ({ movieId }: MovieTrailerProps) => {
 
   return (
     <View className="w-full aspect-video rounded-xl overflow-hidden my-4">
-      <WebView className="flex-1" javaScriptEnabled domStorageEnabled source={{ uri: trailerUrl }}/>
+      <WebView
+        className="flex-1"
+        javaScriptEnabled
+        domStorageEnabled
+        source={{ uri: trailerUrl }}
+      />
     </View>
   );
 };

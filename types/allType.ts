@@ -67,6 +67,16 @@ export interface Serie {
   vote_count: number;
 }
 
+export interface Season {
+  id: number;
+  name: string;
+  overview: string;
+  episode_count: number;
+  poster_path: string | null;
+  season_number: number;
+  air_date: string | null;
+};
+
 export interface Genre {
   id: number;
   name: string;
