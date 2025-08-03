@@ -2,10 +2,11 @@ import React from 'react';
 import { Image, ScrollView, Text, View} from 'react-native';
 import PopularMovie from './components/popularMovie';
 import PopularSeries from './components/popularSeries';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Accueill = () => {
     return (
-        <View className='h-full bg-black' style={{ paddingHorizontal: 0 }} >
+        <SafeAreaView className='h-full bg-black' style={{ paddingHorizontal: 0 }} >
             <ScrollView className='gap-14 pt-10 space-y-16' contentContainerStyle={{ paddingBottom: 100 }}>
                 <View className='items-center gap-3'>
                     <Image source={require('../../assets/avatar-cover.jpg')}  className="w-[90%] h-44 rounded-2xl" resizeMode="cover" />
@@ -27,7 +28,7 @@ const Accueill = () => {
                     <Text className='text-white text-xl font-medium ' style={{ opacity: 0.9 }}>🎁 Favoris</Text>
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }
 

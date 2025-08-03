@@ -3,8 +3,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import TabNavigator from './TabNavigator';
-import LoginPage from '../components/loginPage';
-import { StatusBar } from 'expo-status-bar';
+import AuthStack from './authStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,9 +17,9 @@ export type RootStackParamList = {
 export default function RootNavigator() {
   return (
     <>
-    <StatusBar backgroundColor="#B31B1B"  />
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Connexion" component={LoginPage} />
+    {/* <StatusBar backgroundColor="#B31B1B"  /> */}
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Authentication'>
+        <Stack.Screen name="Authentication" component={AuthStack} />
         <Stack.Screen name="Tabs" component={TabNavigator} />
       </Stack.Navigator>    
     </>

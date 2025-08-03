@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Image, Text, TextInput, View } from 'react-native';
-import SubmitButton from './submitButton';
+import SubmitButton from '../../components/submitButton';
 import { isEmpty } from 'utils/stringUtilis';
-import ErrorMessage from './errorMessage';
+import ErrorMessage from '../../components/errorMessage';
 import axios from 'axios';
-import LoadingSpinner from './loadingSpinner';
+import LoadingSpinner from '../../components/loadingSpinner';
 import * as z from "zod"
 import { useUserConnected } from 'store/userConnected'
 import { useNavigation } from '@react-navigation/native';
@@ -57,13 +57,14 @@ const LoginPage = () => {
             setLoading(false)
         })
     }
+    
     return (
         <View className='bg-red-700 h-full items-center flex-1 pt-[50%] px-8 ' >
             <View className='px-8' >
-                <Image source={require("../assets/logo.png")} className="w-80 h-24" style={{ resizeMode: 'contain' }}/>
+                <Image source={require("../../assets/logo.png")} className="w-80 h-24" style={{ resizeMode: 'contain' }}/>
             </View>
             <View className='bg-yellow-50 px-6 w-full py-10 rounded-2xl flex flex-col gap-5 '>
-                <Text className=' text-lg font-medium text-center '>Connectez vous pour continuer</Text>
+                <Text className=' text-xl font-bold text-center '>Connectez vous pour continuer</Text>
                 <View className='mt-5 mb-5 gap-3'>
                     <View className='gap-2'>
                         <Text className=''>Email</Text>
