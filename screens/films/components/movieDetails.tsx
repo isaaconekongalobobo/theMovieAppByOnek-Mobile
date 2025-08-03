@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
 import { Text, ScrollView, Image, View } from 'react-native';
@@ -6,8 +8,9 @@ import { TMDB_API_KEY } from '@env';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { checkInternetConnecion, paragraphFromText } from 'utils/otherUtils';
 import LoadingSpinner from 'components/loadingSpinner';
-import { Movie } from 'types/allType';
+import { Actor, Movie } from 'types/allType';
 import GenderItem from './genderItem';
+import ActorItem from 'components/actorItem';
 
 type RouteParams = {
   MovieDetail: { id: number };
@@ -17,6 +20,7 @@ const MovieDetail = () => {
   const route = useRoute<RouteProp<RouteParams, 'MovieDetail'>>();
   const { id } = route.params;
   const [movie, setMovie] = useState<Movie>();
+  const [ movieActors, setMovieActors ] = useState<Actor[]>()
   const [loading, setLoading] = useState(true);
   const [ isUserConnected, setIsUserConnected ] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
@@ -45,6 +49,13 @@ const MovieDetail = () => {
       })
       .finally(() => setLoading(false));
   }, [id]);
+
+  useEffect(() => {
+    // Récuperation des acteurs du films
+    axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${TMDB_API_KEY}&language=fr-FR`)
+    .then((response)=> setMovieActors(response.data.cast))
+    .finally(() => setLoading(false));
+  }, []);
 
   // Spinner de chargement
   if (loading) {
@@ -94,6 +105,28 @@ const MovieDetail = () => {
             {movie?.budget === 0 ? "Aucun détail sur le budget" : movie?.budget.toLocaleString() + " $"}
           </Text>
         </View>
+
+        {/* Note */}
+        <View className='gap-2'>
+          <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>Note sur 5</Text>
+          <Text className='text-blue-50 text-balance' style={{ fontSize: 16, opacity: 0.9 }}>
+            
+              {[...Array(5)].map((_, i) => (
+                <Text key={i}>
+                  {i < Math.round(movie?.vote_average! / 2) ? "⭐" : "☆"}
+                </Text>
+              ))}
+          </Text>
+        </View>
+
+        {/* Acteurs */}
+        <View className='gap-5'>
+          <Text className='text-red-600 text-balance font-semibold' style={{ fontSize: 20, opacity: 0.9 }}>À l'affiche</Text>
+          <ScrollView horizontal className='text-blue-50 text-balance'>
+            { movieActors?.map((actor)=> <ActorItem key={actor.id} actor={actor} />) }
+          </ScrollView>
+        </View>
+
       </View>
     </ScrollView>
   ); 
