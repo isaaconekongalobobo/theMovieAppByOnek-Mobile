@@ -10,9 +10,9 @@ interface ActorListItemProps {
 const ActorListItem = ({ actor }: ActorListItemProps) => {
     const navigation = useNavigation<any>()
 
-    const navigateToActor = (actorId: number) => navigation.navigate('ActorDetail', { id: actorId });
+    const navigateToActor = () => navigation.navigate('ActorDetail', { id: actor.id });
     return (
-        <TouchableOpacity key={actor.id} className="flex-row gap-4 items-center" onPress={() => navigateToActor(actor.id)}>
+        <TouchableOpacity key={actor.id} className="flex-row gap-4 items-center" onPress={() => navigateToActor()}>
             { actor.profile_path ? 
                 <Image source={{ uri: `https://image.tmdb.org/t/p/w185${actor.profile_path}` }} className="w-16 h-20 rounded-md"/> : 
                 <View className="w-16 h-20 bg-gray-600 rounded-md justify-center items-center">
